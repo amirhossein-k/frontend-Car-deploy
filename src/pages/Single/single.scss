@@ -1,0 +1,94 @@
+.image-slider-top{
+    padding-top:13px;
+    
+.each-slide-child{
+             display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+
+        }
+}
+
+.img-sidebar{
+  height: 348px;
+}
+
+.details{
+  background-color:#ccc;
+  margin: 24px;
+  transform: translateX(10%);
+  .row-child-detail{
+        padding: 5px;
+     background-color: #fbfbfb;
+     
+    .col-child-detail{
+       
+       &.item{
+       background-color: #0e0d0d;
+    padding: 5px;
+    color: white;
+    h1{
+      font-size: 19px;
+    }
+    }  
+       &.value{
+          background-color: rgb(20 76 147 / 97%);
+    padding: 5px;
+    color: white;
+    &.price_product_yellow{
+      color:#ddd12b;
+    }
+    }  
+    &:hover{
+      background-color:rgb(69 212 255);
+
+    }
+    }
+    &:hover{
+      background-color:rgb(69 212 255);
+    }
+  }
+}
+
+.call-me{
+  position: absolute;
+  bottom: 4px;
+  right: 2px;
+  background: black;
+  border-radius: 8%;
+  width: 10%;
+  /* height: 12%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #fff;
+    
+
+  .col-12{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    &.bi-telephone{
+      font-size: 20px;
+      padding: 0;
+      &:hover{
+        fill: red;
+      }
+    }
+  } 
+
+}
+
+.loadiing{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+}

@@ -1,0 +1,211 @@
+.back{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 100vh;
+flex-direction: column;
+
+}
+
+.background_about{
+    height: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient( rgba(67, 134, 205, 0.3),transparent),url('../../public/about.jpg');
+    background-size: cover;
+    background-position: center;
+
+}
+.row_textbox{
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // position: absolute;
+    // left: 38%;
+    // bottom: 30%;
+}
+.text_box{
+    color: #fff;
+   
+    bottom: 38%;
+    left: 28%;
+
+    justify-content: center;
+    align-items: center;
+    title{
+        margin-top: 201px;
+        font-size: 55px;
+        font-weight: 900;
+        line-height: 130px;
+        color: transparent;
+        -webkit-text-stroke: 1px #fff;
+        background: url('../../public/back copy.png');
+        -webkit-background-clip: text;
+        background-position: 0 0;
+        animation: back 20s linear infinite;
+        display: flex;
+        justify-content: center;
+        word-spacing: -8px;
+    }
+    @keyframes back {
+        100%{
+            background-position: 2000px 0;
+        }
+    }
+    h3{
+        font-size: 25px;
+        font-weight: 500;
+        justify-content: center;
+        display: flex;
+    
+    }
+    .row{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+        justify-content: center;
+        transition: all 0.5s;
+       
+        a{
+            width: fit-content;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px ;
+            border: 2px solid #fff;
+            display: flex;
+            align-items: flex-start;
+            &:hover{
+                border: 4px solid rgb(12 102 197);;
+                transition: all 0.3s;
+                color:rgb(255, 255, 255) ;
+                font-size: 20px;
+                font-weight: 500;
+                    span{
+                        -webkit-text-stroke: 2px rgba(61, 131, 207, 0.733);
+                    }
+                
+               
+            }
+            span{
+                font-size: 30px;
+                line-height: 15px;
+                margin-left: 5px;
+                padding-top: 1px;
+      
+                color: transparent;
+                -webkit-text-stroke: 1px #fff;
+                &:hover{
+                    border: none;
+                    transition: all 0.3s;
+                    
+                }
+            }
+            
+          
+        }
+    }
+    .rows{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+        gap: 21px;
+        justify-content: space-evenly;
+        a{
+            width: fit-content;
+            color: #fff;
+            font-size: 25px;
+            text-decoration: none;
+        
+            display: flex;
+            align-items: flex-start;
+            transition: all 0.5s;
+            .tel{
+                transition: all 0.5s;
+               &:hover{
+
+                content:  url('../../public/whatsapp2.png') !important;
+                opacity: 1;
+                transition: all 0.5s;
+                transform: scale(1.1);
+
+               }
+              
+            }
+            .ins{
+
+                transition: all 0.5s;
+               &:hover{
+ 
+                content:  url('../../public/incop.png') !important;
+                opacity: 1;
+                transition: all 0.3s;
+                transform: scale(1.6);
+
+               }
+              
+            }
+            span{
+                font-size: 30px;
+                line-height: 15px;
+                margin-left: 5px;
+                padding-top: 1px;
+            }
+            img{
+                width: 52px;
+                display: block;
+            }
+        }
+    }
+}
+
+@keyframes tele {
+    0%{
+        content:  url('../../public/whatsapp2.png') ;
+        opacity: 0.8;
+        transition: all 0.5s;
+    }
+    50%{
+        opacity: 0.6;
+    }
+
+    100%{
+       
+    }
+   }
+
+   .boxmodal{
+    z-index: 1000;
+    background-color: #fff;
+    left: 4%;
+    top: -15%;
+    width: 90%;
+    border-radius: 10px;
+    position: relative;
+    span{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        content: '';
+        background-color: rgb(12, 102, 192);
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        top: -15px;
+        right: -10px;
+        color: #fff;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(186, 3, 3, 0.8);
+        }
+    }
+    img{
+        padding: 5px;
+        width: 100%;
+        height:100%;
+        object-fit: fill;
+        border-radius: 10px;
+    }
+   }

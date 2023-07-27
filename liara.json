@@ -1,0 +1,7 @@
+{
+    "platform": "react",
+    "app": "outoamir",
+    "react": {
+      "sourceMap": true
+   }
+  }

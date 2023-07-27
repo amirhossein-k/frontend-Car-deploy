@@ -1,0 +1,195 @@
+.pruduct {
+  width: 300px;
+  height: 445px;
+  margin: 0 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 5px 1px rgba(134, 129, 129, 0.5);
+  position: relative;
+}
+.pruduct span.approve{
+  display: none;
+}
+.pruduct span.sold{
+position: absolute;
+width: 100%;
+height: 100%;
+background-color: rgba(170, 170, 170, 0.366);
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.pruduct span.sold::before{
+  position: absolute;
+  content: "فروخته شده";
+  width: 100%;
+height: 100%;
+color: #ff1515;
+font-size: 29px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.pruduct:hover {
+  box-shadow: 1px 1px 5px 3px rgba(134, 129, 129, 0.5);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pruduct:hover .name{
+  color:rgb(61 114 233);
+  transition: all 0.2s;
+
+}
+.name {
+  grid-row: span 1;
+  font-size: 19px;
+  letter-spacing: 0.1rem;
+  font-weight: 400;
+  line-height: 100%;
+  padding-top: 8px;
+  text-transform: uppercase;
+  padding: 11px 0 0 0;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catagory {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.catagory img {
+  width: 22px;
+  margin-right: 5px;
+}
+.price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.price img {
+  width: 18px;
+  margin-right: 5px;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  text-align: center;
+  line-height: 100%;
+}
+.imgg {
+  width: 20px !important;
+  height: auto;
+}
+.buttonn {
+  height: 50px;
+  width: 20%;
+  color: white;
+  background-color: black;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 0.5px rgba(0, 0, 0, 0.2);
+  border: 0.8px solid black;
+  transition: background-color 0.5s ease;
+}
+.buttonn:hover {
+  color: black;
+  background-color: white;
+}
+.con-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.pruduct .cover{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #dfdfdf87;
+}
+
+@media screen and (max-width: 685px) {
+  .pruduct {
+    width: 350px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 575px) and (max-width: 685px) {
+  .pruduct {
+    width: 283px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 730px) and (max-width: 785px) {
+  .pruduct {
+    width: 316px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 750px) and (max-width: 830px) {
+  .pruduct {
+    width: 316px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 940px) and (max-width: 990px) {
+  .pruduct {
+    width: 257px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 990px) and (max-width: 1050px) {
+  .pruduct {
+    width: 269px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 1050px) and (max-width: 1108px) {
+  .pruduct {
+    width: 289px;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 1203px) and (max-width: 1250px) {
+  .pruduct {
+    width: 267px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 1274px) and (max-width: 1300px) {
+  .pruduct {
+    width: 274px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 1300px) and (max-width: 1365px) {
+  .pruduct {
+    width: 293px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 1365px) and (max-width: 1405px) {
+  .pruduct {
+    width: 308px;
+    height: auto;
+  }
+}
+@media screen and (min-width: 1405px) and (max-width: 1449px) {
+  .pruduct {
+    width: 316px;
+    height: auto;
+  }
+}
+
+

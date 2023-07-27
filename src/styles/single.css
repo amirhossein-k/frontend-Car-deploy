@@ -1,0 +1,31 @@
+.call-me{
+
+}
+.call-me .ring{
+    animation: ani6 6s infinite linear ;
+    padding: 5px;
+}
+.call-me .ring svg{
+    animation: ani7 1s infinite linear ;
+}
+
+@keyframes ani6 {
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(-10deg);
+        fill: aqua;
+    }
+    100%{
+        transform: rotate(10deg);
+    }
+}
+@keyframes ani7 {
+   
+    50%{
+
+        fill: aqua;
+    }
+   
+}
