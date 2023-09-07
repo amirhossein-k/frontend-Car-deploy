@@ -1,16 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {useState, useRef, useEffect} from "react";
 
 import styles from "./modal.module.scss";
-import { RiCloseLine } from "react-icons/ri";
+import {RiCloseLine} from "react-icons/ri";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControls from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import {  Button, Form } from "react-bootstrap";
-import { TagsInput } from "react-tag-input-component";
-import {  useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { updateProductAction } from "../../../actions/productActions";
+import {Button, Form} from "react-bootstrap";
+import {TagsInput} from "react-tag-input-component";
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {updateProductAction} from "../../../actions/productActions";
 import axios from "axios";
 
 ///////////////////////////
@@ -43,16 +43,29 @@ const Modal = ({
   setUpdate,
   files,
   setFiles,
-  setAge,age,
+  setAge,
+  age,
   setKeysliderproduct,
   keysliderproduct,
   keysliderproductupd,
   setKeysliderproductupd,
-  color,setColor,fuel,setFuel,gearbox,setGearbox,engine,setEngine,healthbody,setHealthbody,garanti,setGaranti,scriptt,setScriptt
-          
+  color,
+  setColor,
+  fuel,
+  setFuel,
+  gearbox,
+  setGearbox,
+  engine,
+  setEngine,
+  healthbody,
+  setHealthbody,
+  garanti,
+  setGaranti,
+  scriptt,
+  setScriptt,
 }) => {
   ////////////////////////
-  const [title, setTitle] = useState('pic product');
+  const [title, setTitle] = useState("pic product");
   const [keys, setKeys] = useState([]);
   const [changephoto, setChangephoto] = useState(false);
 
@@ -62,70 +75,65 @@ const Modal = ({
   const dispatch = useDispatch();
   ///////////////
   const productupdate = useSelector((state) => state.productUpdate);
-  const { loading, success } = productupdate;
+  const {loading, success} = productupdate;
   //////////////
   const [loadpic, setLoadpic] = useState(false);
   const [load, setLoad] = useState(false);
-  const postDetails = async(e) => {
-   e.preventDefault()
-      setLoadpic(true);
-      const formData = new FormData();
-      Object.values(files).forEach(file=>{
-        formData.append('files',file)
-        
-      })
-      formData.append('title',title)
-      formData.append('key',keysliderproduct)
+  const postDetails = async (e) => {
+    e.preventDefault();
+    setLoadpic(true);
+    const formData = new FormData();
+    Object.values(files).forEach((file) => {
+      formData.append("files", file);
+    });
+    formData.append("title", title);
+    formData.append("key", keysliderproduct);
 
-      ///////
+    ///////
 
+    try {
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
 
-      try{
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        };
-  
-        const { data } = await axios.put(
-          "https://carback.iran.liara.run/api/uploade/updateMultipleFile",
-            formData,
-          config
-        );
+      const {data} = await axios.put(
+        "https://backend-car-deploy.vercel.app/api/uploade/updateMultipleFile",
+        formData,
+        config
+      );
 
-        setPic([])
-        data.file.map(item=>{
-          setPic((oldpic) => [...oldpic, `${item.filePath.toString()}`]);
-          setKeysliderproductupd((oldkey) => [...oldkey, `${item.fileKey.toString()}`])
-        })
-       
-        setLoadpic(false);
-  
-  
-      }catch(error){
-        console.log(error);
-      }
+      setPic([]);
+      data.file.map((item) => {
+        setPic((oldpic) => [...oldpic, `${item.filePath.toString()}`]);
+        setKeysliderproductupd((oldkey) => [
+          ...oldkey,
+          `${item.fileKey.toString()}`,
+        ]);
+      });
 
-
+      setLoadpic(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   /////////
-  const resetHandler = async(e) => {
-    
+  const resetHandler = async (e) => {
     setNameCar("");
     setFactory("");
     setDistance("");
     setStatus(null);
     setPrice("");
-    setAge("")
-
+    setAge("");
 
     // ///////////
-   
-    if(keysliderproduct.length !==0) setKeysliderproduct((oldkey) => oldkey.splice(0, oldkey.length))
+
+    if (keysliderproduct.length !== 0)
+      setKeysliderproduct((oldkey) => oldkey.splice(0, oldkey.length));
     setSkills((prevskill) => prevskill.splice(0, prevskill.length));
 
     fileInput.current.value = null;
-
   };
 
   ////////////////
@@ -133,7 +141,7 @@ const Modal = ({
     setLoad(true);
     e.preventDefault();
     if (!namecar || !factory || !distance || !skills) return;
-console.log(age,'age')
+    console.log(age, "age");
     dispatch(
       updateProductAction(
         isid,
@@ -145,12 +153,18 @@ console.log(age,'age')
         price,
         status,
         age,
-        color,fuel,engine,healthbody,garanti,gearbox,scriptt
+        color,
+        fuel,
+        engine,
+        healthbody,
+        garanti,
+        gearbox,
+        scriptt
       )
     );
 
     resetHandler();
-    setUpdate(false)
+    setUpdate(false);
   };
 
   const handleclose = () => {
@@ -170,59 +184,58 @@ console.log(age,'age')
       <div className={styles.centered}>
         <div className={styles.modal}>
           <button className={styles.closeBtn} onClick={() => handleclose()}>
-            <RiCloseLine style={{ marginBottom: "-3px" }} />
+            <RiCloseLine style={{marginBottom: "-3px"}} />
           </button>
           {isOpens && (
             <div className={styles.modalContent}>
               <div className="top">
                 <h1>Add New Product</h1>
               </div>
- 
-              <div className="bottom-new">
 
+              <div className="bottom-new">
                 {pic ? (
                   <div className={styles.image_box}>
-                    {pic.map((item,index)=>{
-                  return(
-                    <img src={item} key={index} style={{width:150}}/>
-                  )
-                })}
+                    {pic.map((item, index) => {
+                      return (
+                        <img src={item} key={index} style={{width: 150}} />
+                      );
+                    })}
                   </div>
-                ) : <p>no photo</p>}
+                ) : (
+                  <p>no photo</p>
+                )}
 
                 <Form className="formfix" onSubmit={postDetails}>
-            <div className="form-0">
-              <Form.Group controlId="pic">
-                <Form.Label>اطلاعات محصول</Form.Label>
-                <Form.Control
-                  type="file"
-                  name="files"
-                  onChange={e =>  setFiles(e.target.files)}
-                  ref={fileInput}
-                  multiple
-                  accept=".jpeg, .png, .jpg"
-                />
-              </Form.Group>
-            </div>
-            <div className="button-new">
-              <Button
-                type="submit"
-                variant="primary"
-                className={"create-new"}
-                style={{marginLeft: 2}}
-              >
-                ذخیره عکس ها
-              </Button>
-              </div>
-            </Form>
-
+                  <div className="form-0">
+                    <Form.Group controlId="pic">
+                      <Form.Label>اطلاعات محصول</Form.Label>
+                      <Form.Control
+                        type="file"
+                        name="files"
+                        onChange={(e) => setFiles(e.target.files)}
+                        ref={fileInput}
+                        multiple
+                        accept=".jpeg, .png, .jpg"
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="button-new">
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      className={"create-new"}
+                      style={{marginLeft: 2}}
+                    >
+                      ذخیره عکس ها
+                    </Button>
+                  </div>
+                </Form>
 
                 <Form className={styles.formfix} onSubmit={submitHandler}>
-
                   <div className={styles.form_1}>
                     <Form.Group
                       controlId="titlecar"
-                      style={{ width: "90%", marginRight: 6 }}
+                      style={{width: "90%", marginRight: 6}}
                     >
                       <Form.Label>نام خودرو</Form.Label>
                       <Form.Control
@@ -235,7 +248,7 @@ console.log(age,'age')
 
                     <Form.Group
                       controlId="factory"
-                      style={{ width: "90%", marginRight: 6 }}
+                      style={{width: "90%", marginRight: 6}}
                     >
                       <Form.Label>نام کارخانه</Form.Label>
                       <Form.Control
@@ -246,7 +259,7 @@ console.log(age,'age')
                       />
                     </Form.Group>
 
-                    <Form.Group controlId="distance" style={{ width: "90%" }}>
+                    <Form.Group controlId="distance" style={{width: "90%"}}>
                       <Form.Label>کارکرد </Form.Label>
                       <Form.Control
                         type="number"
@@ -255,79 +268,72 @@ console.log(age,'age')
                         onChange={(e) => setDistance(e.target.value)}
                       />
                     </Form.Group>
-
                   </div>
 
+                  <div className={styles.form_1}>
+                    <Form.Group controlId="color" style={{width: "100%"}}>
+                      <Form.Label>رنگ</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={color}
+                        placeholder="رنگ"
+                        onChange={(e) => setColor(e.target.value)}
+                      />
+                    </Form.Group>
 
-            <div className={styles.form_1}>
-
-              <Form.Group controlId="color" style={{ width: "100%" }}>
-                <Form.Label>رنگ</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={color}
-                  placeholder="رنگ"
-                  onChange={(e) => setColor(e.target.value)}
-                />
-              </Form.Group>
-
-              <Form.Group controlId="fuel" style={{ width: "100%" }}>
-                <Form.Label>نوع سوخت</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={fuel}
-                  placeholder="نوع سوخت"
-                  onChange={(e) => setFuel(e.target.value)}
-                />
-              </Form.Group>
-              
-            </div>
-            <div className={styles.form_1}>
-              <Form.Group controlId="engine" style={{ width: "100%" }}>
-                <Form.Label>وضعیت موتور</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={engine}
-                  placeholder="وضعیت موتور"
-                  onChange={(e) => setEngine(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="healthbody" style={{ width: "100%" }}>
-                  <Form.Label>وضعیت شاسی</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={healthbody}
-                    placeholder="وضعیت شاسی"
-                    onChange={(e) => setHealthbody(e.target.value)}
-                  />
-                </Form.Group>
-
-            </div>
-            <div className={styles.form_1}>
-
-                <Form.Group controlId="garanti" style={{ width: "100%" }}>
-                  <Form.Label>مهلت بیمه شخص ثالث</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={garanti}
-                    placeholder="مهلت بیمه شخص ثالث"
-                    onChange={(e) => setGaranti(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="gearbox" style={{ width: "100%" }}>
-                  <Form.Label>گریبکس</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={gearbox}
-                    placeholder="گریبکس"
-                    onChange={(e) => setGearbox(e.target.value)}
-                  />
-                </Form.Group>
-
-            </div>
+                    <Form.Group controlId="fuel" style={{width: "100%"}}>
+                      <Form.Label>نوع سوخت</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={fuel}
+                        placeholder="نوع سوخت"
+                        onChange={(e) => setFuel(e.target.value)}
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className={styles.form_1}>
+                    <Form.Group controlId="engine" style={{width: "100%"}}>
+                      <Form.Label>وضعیت موتور</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={engine}
+                        placeholder="وضعیت موتور"
+                        onChange={(e) => setEngine(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="healthbody" style={{width: "100%"}}>
+                      <Form.Label>وضعیت شاسی</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={healthbody}
+                        placeholder="وضعیت شاسی"
+                        onChange={(e) => setHealthbody(e.target.value)}
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className={styles.form_1}>
+                    <Form.Group controlId="garanti" style={{width: "100%"}}>
+                      <Form.Label>مهلت بیمه شخص ثالث</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={garanti}
+                        placeholder="مهلت بیمه شخص ثالث"
+                        onChange={(e) => setGaranti(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId="gearbox" style={{width: "100%"}}>
+                      <Form.Label>گریبکس</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={gearbox}
+                        placeholder="گریبکس"
+                        onChange={(e) => setGearbox(e.target.value)}
+                      />
+                    </Form.Group>
+                  </div>
 
                   <div className={styles.form_2}>
-                  <Form.Group controlId="age" style={{ width: "90%" }}>
+                    <Form.Group controlId="age" style={{width: "90%"}}>
                       <Form.Label>سال تولید</Form.Label>
                       <Form.Control
                         type="number"
@@ -344,8 +350,8 @@ console.log(age,'age')
                       name="skills"
                       placeHolder="ویژگی"
                     />
-     
-                    <FormControls sx={{ m: 1, minWidth: 120 }} size="small">
+
+                    <FormControls sx={{m: 1, minWidth: 120}} size="small">
                       <InputLabel id="demo-select-small">وضعیت</InputLabel>
                       <Select
                         labelId="demo-select-small"
@@ -413,10 +419,9 @@ console.log(age,'age')
           )}
           {isOpens && (
             <div className={styles.modalContent}>
-              <img src={urlpic} style={{ width: 200 }} />
+              <img src={urlpic} style={{width: 200}} />
             </div>
           )}
-
         </div>
       </div>
     </>

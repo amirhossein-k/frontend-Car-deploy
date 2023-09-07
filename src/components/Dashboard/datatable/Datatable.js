@@ -1,11 +1,7 @@
 import "./datatable.scss";
 
-import React, {
-  useEffect,
-  useState,
-
-} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {
   listProductAction,
   deleteProductAction,
@@ -13,12 +9,7 @@ import {
 } from "../../../actions/productActions";
 import axios from "axios";
 
-import {
-  DataGrid,
-
-  GridActionsCellItem,
-
-} from "@mui/x-data-grid";
+import {DataGrid, GridActionsCellItem} from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SyncIcon from "@mui/icons-material/Sync";
@@ -29,7 +20,7 @@ import ModalImages from "../modal/ModalImages";
 
 //.......................................................
 
-const Datatable = ({ setDatas, datas }) => {
+const Datatable = ({setDatas, datas}) => {
   const deleteUser = React.useCallback(
     (id) => () => {
       setTimeout(() => {
@@ -40,7 +31,7 @@ const Datatable = ({ setDatas, datas }) => {
   );
   //////////////////////////
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    {field: "id", headerName: "ID", width: 90},
     {
       field: "namecar",
       headerName: "خودرو",
@@ -77,7 +68,6 @@ const Datatable = ({ setDatas, datas }) => {
           src={params.value[0]}
           className="img-table "
           onClick={() => handlepic(params.value[0])}
-
           alt=""
         />
       ),
@@ -123,7 +113,7 @@ const Datatable = ({ setDatas, datas }) => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { product, loading } = productList;
+  const {product, loading} = productList;
 
   const productDelete = useSelector((state) => state.productDelete);
   const {
@@ -141,7 +131,7 @@ const Datatable = ({ setDatas, datas }) => {
   /////////////////
   const [pr, setPer] = useState([]);
   const [produc, setProduc] = useState([]);
-  const [title, setTitle] = useState('pic product');
+  const [title, setTitle] = useState("pic product");
 
   ////////////
   const [namecar, setNameCar] = useState("");
@@ -149,8 +139,6 @@ const Datatable = ({ setDatas, datas }) => {
   const [distance, setDistance] = useState("");
   const [age, setAge] = useState("");
 
-
-  
   const [color, setColor] = useState("");
   const [fuel, setFuel] = useState("");
   const [engine, setEngine] = useState("");
@@ -175,7 +163,7 @@ const Datatable = ({ setDatas, datas }) => {
   const openhandle = (me) => {
     setIsOpens(true);
     setIsId(me);
-    var result = product.find(({ id }) => id === me);
+    var result = product.find(({id}) => id === me);
     console.log(isOpens, "isopen");
     setNameCar(result.namecar);
 
@@ -186,15 +174,14 @@ const Datatable = ({ setDatas, datas }) => {
     setStatus(result.status);
     setPrice(result.price);
     setAge(result.age);
-    setKeysliderproduct(result.keysliderproduct)
-    setColor(result.color)
-    setEngine(result.engine)
-    setGaranti(result.garanti)
-    setGearbox(result.gearbox)
-    setHealthbody(result.healthbody)
-    setFuel(result.fuel)
-    setScriptt(result?.scriptt)
-
+    setKeysliderproduct(result.keysliderproduct);
+    setColor(result.color);
+    setEngine(result.engine);
+    setGaranti(result.garanti);
+    setGearbox(result.gearbox);
+    setHealthbody(result.healthbody);
+    setFuel(result.fuel);
+    setScriptt(result?.scriptt);
   };
 
   const habdlepic = React.useCallback(
@@ -214,26 +201,22 @@ const Datatable = ({ setDatas, datas }) => {
   /////////////
   const deletehandle = React.useCallback(
     (id) => () => {
-      setTimeout(async() => {
+      setTimeout(async () => {
+        try {
+          const config = {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          };
 
-         try{
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-    
-      const { data } = await axios.delete(
-        "https://carback.iran.liara.run/api/uploade/deleteMultipleFile",
-        title,
-        config
-      );
-      
-    
-    
-    }catch(error){
-      console.log(error);
-    }
+          const {data} = await axios.delete(
+            "https://backend-car-deploy.vercel.app/api/uploade/deleteMultipleFile",
+            title,
+            config
+          );
+        } catch (error) {
+          console.log(error);
+        }
         dispatch(deleteProductAction(id));
       });
     },
@@ -254,7 +237,7 @@ const Datatable = ({ setDatas, datas }) => {
 
   return (
     <>
-      <Box sx={{ height: 400, width: "100%" }}>
+      <Box sx={{height: 400, width: "100%"}}>
         {(() => {
           if (product) {
             return (
@@ -265,7 +248,7 @@ const Datatable = ({ setDatas, datas }) => {
                 rowsPerPageOptions={[5]}
                 checkboxSelection
                 disableSelectionOnClick
-                experimentalFeatures={{ newEditingApi: true }}
+                experimentalFeatures={{newEditingApi: true}}
               />
             );
           } else {
@@ -296,7 +279,8 @@ const Datatable = ({ setDatas, datas }) => {
           setLoadupdate={setLoadupdate}
           loadupdate={loadupdate}
           setUpdate={setUpdate}
-          files={files} setFiles={setFiles}
+          files={files}
+          setFiles={setFiles}
           setAge={setAge}
           age={age}
           setKeysliderproduct={setKeysliderproduct}
@@ -317,7 +301,6 @@ const Datatable = ({ setDatas, datas }) => {
           setGaranti={setGaranti}
           setScriptt={setScriptt}
           scriptt={scriptt}
-          
         />
       )}
       {openpic && (
@@ -328,7 +311,6 @@ const Datatable = ({ setDatas, datas }) => {
           setOpenpic={setOpenpic}
         />
       )}
-
     </>
   );
 };

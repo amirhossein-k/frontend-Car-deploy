@@ -7,7 +7,9 @@ import {
   DETAIL_GET_SUCCESS,
   DETAIL_GET_FAIL,
   DETAIL_GET_NULL,
-  DETAIL_UPDATE_FAIL,DETAIL_UPDATE_REQUEST,DETAIL_UPDATE_SUCCESS
+  DETAIL_UPDATE_FAIL,
+  DETAIL_UPDATE_REQUEST,
+  DETAIL_UPDATE_SUCCESS,
 } from "../constants/detailConstant";
 import axios from "axios";
 
@@ -15,9 +17,9 @@ import axios from "axios";
 export const getDetailAction = (empty) => async (dispatch, getState) => {
   try {
     if (empty === true) {
-      dispatch({ type: DETAIL_GET_NULL });
+      dispatch({type: DETAIL_GET_NULL});
     } else {
-      dispatch({ type: DETAIL_GET_REQUEST });
+      dispatch({type: DETAIL_GET_REQUEST});
 
       // const {
       //   userLogin: { userInfo },
@@ -30,14 +32,13 @@ export const getDetailAction = (empty) => async (dispatch, getState) => {
         },
       };
 
-      const { data } = await axios.get(
-        "https://carback.iran.liara.run/api/detail",
+      const {data} = await axios.get(
+        "https://backend-car-deploy.vercel.app/api/detail",
         {},
         config
       );
 
-
-      dispatch({ type: DETAIL_GET_SUCCESS, payload: data });
+      dispatch({type: DETAIL_GET_SUCCESS, payload: data});
       localStorage.setItem("DetailGet", JSON.stringify(data));
     }
   } catch (error) {
@@ -51,31 +52,30 @@ export const getDetailAction = (empty) => async (dispatch, getState) => {
   }
 };
 
-export const updateDetailAction = (
-  header_img,
-  profile_img,
-  title,
-  subtitle,
-  slider_img,
-  times_1,
-  times_2,
-  times_3,
-  social_phone,
-  social_address,
-  social_ig,
-  keyprofile,
-  keyheader,
-  keyslider,
-  id,
-  
-)=>
-  async(dispatch,getState)=>{
-    try{
-      dispatch({type:DETAIL_UPDATE_REQUEST})
+export const updateDetailAction =
+  (
+    header_img,
+    profile_img,
+    title,
+    subtitle,
+    slider_img,
+    times_1,
+    times_2,
+    times_3,
+    social_phone,
+    social_address,
+    social_ig,
+    keyprofile,
+    keyheader,
+    keyslider,
+    id
+  ) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({type: DETAIL_UPDATE_REQUEST});
 
-      
       const {
-        userLogin: { userInfo },
+        userLogin: {userInfo},
       } = getState();
 
       const config = {
@@ -84,9 +84,9 @@ export const updateDetailAction = (
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      
-      const { data } = await axios.put(
-        "https://carback.iran.liara.run/api/detail",
+
+      const {data} = await axios.put(
+        "https://backend-car-deploy.vercel.app/api/detail",
         {
           header_img,
           profile_img,
@@ -107,10 +107,8 @@ export const updateDetailAction = (
         config
       );
 
-      dispatch({ type: DETAIL_UPDATE_SUCCESS, payload: data });
-
-
-    }catch (error) {
+      dispatch({type: DETAIL_UPDATE_SUCCESS, payload: data});
+    } catch (error) {
       dispatch({
         type: DETAIL_UPDATE_FAIL,
         payload:
@@ -119,9 +117,7 @@ export const updateDetailAction = (
             : error.message,
       });
     }
-  }
-
-
+  };
 
 export const createDetailAction =
   (
@@ -137,18 +133,19 @@ export const createDetailAction =
     social_address,
     social_ig,
     keyprofile,
-          keyheader,
-          keyslider,empty
+    keyheader,
+    keyslider,
+    empty
   ) =>
   async (dispatch, getState) => {
     try {
       if (empty === true) {
-        dispatch({ type: DETAIL_NULL });
+        dispatch({type: DETAIL_NULL});
       } else {
-        dispatch({ type: DETAIL_REQUEST });
+        dispatch({type: DETAIL_REQUEST});
 
         const {
-          userLogin: { userInfo },
+          userLogin: {userInfo},
         } = getState();
 
         const config = {
@@ -158,8 +155,8 @@ export const createDetailAction =
           },
         };
 
-        const { data } = await axios.post(
-          "https://carback.iran.liara.run/api/detail",
+        const {data} = await axios.post(
+          "https://backend-car-deploy.vercel.app/api/detail",
           {
             header_img,
             profile_img,
@@ -179,7 +176,7 @@ export const createDetailAction =
           config
         );
 
-        dispatch({ type: DETAIL_SUCCESS, payload: data });
+        dispatch({type: DETAIL_SUCCESS, payload: data});
       }
     } catch (error) {
       dispatch({

@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import {useState, useRef, useEffect} from "react";
 import "./new.scss";
-import { Col, Row, Button, Form } from "react-bootstrap";
-import { TagsInput } from "react-tag-input-component";
-import {  useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import {Col, Row, Button, Form} from "react-bootstrap";
+import {TagsInput} from "react-tag-input-component";
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import Sidebar from "../../../components/Dashboard/sidebar/Sidebar";
-import { createProductAction } from "../../../actions/productActions";
+import {createProductAction} from "../../../actions/productActions";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControls from "@mui/material/FormControl";
@@ -18,10 +18,9 @@ const New = () => {
   const [factory, setFactory] = useState("");
   const [distance, setDistance] = useState("");
   const [age, setAge] = useState("");
-  const [title, setTitle] = useState('pic product');
+  const [title, setTitle] = useState("pic product");
   const [skills, setSkills] = useState([]);
   const [pic, setPic] = useState([]);
-
 
   const [status, setStatus] = useState("");
   const [price, setPrice] = useState("");
@@ -45,7 +44,7 @@ const New = () => {
   const dispatch = useDispatch();
   //////////////////////
   const productcrate = useSelector((state) => state.productCreate);
-  const { loading, success } = productcrate;
+  const {loading, success} = productcrate;
   /////////////////////
   useEffect(() => {
     if (success === true) {
@@ -55,55 +54,44 @@ const New = () => {
   }, [success]);
 
   //////////////////////////
-  const postDetails = async(e) => {
-     e.preventDefault();
-      setLoade(true);
-      
-      const formData = new FormData();
+  const postDetails = async (e) => {
+    e.preventDefault();
+    setLoade(true);
 
+    const formData = new FormData();
 
-      Object.values(files).forEach(file=>{
-        formData.append('files',file)
-        
-      })
-      formData.append('title',title)
+    Object.values(files).forEach((file) => {
+      formData.append("files", file);
+    });
+    formData.append("title", title);
 
-      try{
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        };
-  
-        const { data } = await axios.post(
-          "https://carback.iran.liara.run/api/uploade/multipleFiles",
-            formData,
-          config
-        );
-   
-        data.file.map(item=>{
-          setPic((oldpic) => [...oldpic, `${item.filePath.toString()}`]);
-          setKeysliderproduct((oldkey) => [...oldkey, `${item.fileKey.toString()}`])
+    try {
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
 
-        })
+      const {data} = await axios.post(
+        "https://backend-car-deploy.vercel.app/api/uploade/multipleFiles",
+        formData,
+        config
+      );
 
-        setLoade(false);
-        setErrorPic(false);
+      data.file.map((item) => {
+        setPic((oldpic) => [...oldpic, `${item.filePath.toString()}`]);
+        setKeysliderproduct((oldkey) => [
+          ...oldkey,
+          `${item.fileKey.toString()}`,
+        ]);
+      });
 
-  
-  
-      }catch(error){
-        console.log(error);
-      }
-
-
-    
-       
-     
-
+      setLoade(false);
+      setErrorPic(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-
 
   //////////////
   const resetHandler = () => {
@@ -112,15 +100,14 @@ const New = () => {
     setDistance("");
     setStatus(null);
     setPrice("");
-    setAge("")
+    setAge("");
 
-    setColor("")
-    setFuel("")
-    setEngine("")
-    setHealthbody("")
-    setGaranti("")
-    setGearbox("")
-
+    setColor("");
+    setFuel("");
+    setEngine("");
+    setHealthbody("");
+    setGaranti("");
+    setGearbox("");
 
     setSkills((prevskill) => prevskill.splice(0, prevskill.length));
     setKeysliderproduct((oldkey) => oldkey.splice(0, oldkey.length));
@@ -145,7 +132,12 @@ const New = () => {
           price,
           status,
           age,
-          color,fuel,engine,healthbody,garanti,gearbox
+          color,
+          fuel,
+          engine,
+          healthbody,
+          garanti,
+          gearbox
         )
       );
       resetHandler();
@@ -155,8 +147,7 @@ const New = () => {
   ///////////////
 
   return (
-    <Row className="new" >
-
+    <Row className="new">
       <Col sm={12} md={2} lg={1} className="fixlistnavbar">
         <Sidebar />
       </Col>
@@ -177,9 +168,7 @@ const New = () => {
         )}
 
         <div className="bottom-new">
-          <div className="row">
-
-          </div>
+          <div className="row"></div>
 
           <Form className="formfix" onSubmit={postDetails}>
             <div className="form-0">
@@ -188,7 +177,7 @@ const New = () => {
                 <Form.Control
                   type="file"
                   name="files"
-                  onChange={e =>  setFiles(e.target.files)}
+                  onChange={(e) => setFiles(e.target.files)}
                   ref={fileInput}
                   multiple
                   accept=".jpeg, .png, .jpg"
@@ -204,15 +193,13 @@ const New = () => {
               >
                 ذخیره عکس ها
               </Button>
-              </div>
-            </Form>
+            </div>
+          </Form>
 
           {errorPic && <p>عکس انتخاب کنید</p>}
           <Form className="formfix" onSubmit={submitHandler}>
-
             <div className="form-1">
-
-              <Form.Group controlId="titlecar" style={{ width: "100%" }}>
+              <Form.Group controlId="titlecar" style={{width: "100%"}}>
                 <Form.Label>نام خودرو</Form.Label>
                 <Form.Control
                   type="text"
@@ -222,7 +209,7 @@ const New = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="factory" style={{ width: "100%" }}>
+              <Form.Group controlId="factory" style={{width: "100%"}}>
                 <Form.Label>نام کارخانه</Form.Label>
                 <Form.Control
                   type="text"
@@ -232,7 +219,7 @@ const New = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="distance" style={{ width: "100%" }}>
+              <Form.Group controlId="distance" style={{width: "100%"}}>
                 <Form.Label>کارکرد</Form.Label>
                 <Form.Control
                   type="number"
@@ -241,27 +228,24 @@ const New = () => {
                   onChange={(e) => setDistance(e.target.value)}
                 />
               </Form.Group>
-
             </div>
             <div className="form-2 row">
               <Col md={5} lg={4}>
-              <Form.Group controlId="distance" style={{ width: "100%" }}>
-                <Form.Label>سال تولید</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={age}
-                  placeholder="سال تولید"
-                  onChange={(e) => setAge(e.target.value)}
-                />
-              </Form.Group>
+                <Form.Group controlId="distance" style={{width: "100%"}}>
+                  <Form.Label>سال تولید</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={age}
+                    placeholder="سال تولید"
+                    onChange={(e) => setAge(e.target.value)}
+                  />
+                </Form.Group>
               </Col>
-
             </div>
-        
+
             {/* new */}
             <div className="form-1 ">
-
-              <Form.Group controlId="color" style={{ width: "100%" }}>
+              <Form.Group controlId="color" style={{width: "100%"}}>
                 <Form.Label>رنگ</Form.Label>
                 <Form.Control
                   type="text"
@@ -271,7 +255,7 @@ const New = () => {
                 />
               </Form.Group>
 
-              <Form.Group controlId="fuel" style={{ width: "100%" }}>
+              <Form.Group controlId="fuel" style={{width: "100%"}}>
                 <Form.Label>نوع سوخت</Form.Label>
                 <Form.Control
                   type="text"
@@ -280,10 +264,9 @@ const New = () => {
                   onChange={(e) => setFuel(e.target.value)}
                 />
               </Form.Group>
-              
             </div>
             <div className="form-1">
-              <Form.Group controlId="engine" style={{ width: "100%" }}>
+              <Form.Group controlId="engine" style={{width: "100%"}}>
                 <Form.Label>وضعیت موتور</Form.Label>
                 <Form.Control
                   type="text"
@@ -292,54 +275,51 @@ const New = () => {
                   onChange={(e) => setEngine(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group controlId="healthbody" style={{ width: "100%" }}>
-                  <Form.Label>وضعیت شاسی</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={healthbody}
-                    placeholder="وضعیت شاسی"
-                    onChange={(e) => setHealthbody(e.target.value)}
-                  />
-                </Form.Group>
-
+              <Form.Group controlId="healthbody" style={{width: "100%"}}>
+                <Form.Label>وضعیت شاسی</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={healthbody}
+                  placeholder="وضعیت شاسی"
+                  onChange={(e) => setHealthbody(e.target.value)}
+                />
+              </Form.Group>
             </div>
             <div className="form-1">
-
-                <Form.Group controlId="garanti" style={{ width: "100%" }}>
-                  <Form.Label>مهلت بیمه شخص ثالث</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={garanti}
-                    placeholder="مهلت بیمه شخص ثالث"
-                    onChange={(e) => setGaranti(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="gearbox" style={{ width: "100%" }}>
-                  <Form.Label>گریبکس</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={gearbox}
-                    placeholder="گریبکس"
-                    onChange={(e) => setGearbox(e.target.value)}
-                  />
-                </Form.Group>
-
+              <Form.Group controlId="garanti" style={{width: "100%"}}>
+                <Form.Label>مهلت بیمه شخص ثالث</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={garanti}
+                  placeholder="مهلت بیمه شخص ثالث"
+                  onChange={(e) => setGaranti(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="gearbox" style={{width: "100%"}}>
+                <Form.Label>گریبکس</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={gearbox}
+                  placeholder="گریبکس"
+                  onChange={(e) => setGearbox(e.target.value)}
+                />
+              </Form.Group>
             </div>
-
 
             <div className="form-2 row">
               <Col md={5} lg={4}>
-              <Form.Label> ویژگی </Form.Label>
-              <TagsInput
+                <Form.Label> ویژگی </Form.Label>
+                <TagsInput
                   value={skills}
                   onChange={setSkills}
-
                   placeHolder="ویژگی"
                 />
               </Col>
               <Col md={5} lg={4}>
-                <FormControls sx={{ margin: "32px 8px", minWidth: 120 ,display: "flex"}} size="small">
-              
+                <FormControls
+                  sx={{margin: "32px 8px", minWidth: 120, display: "flex"}}
+                  size="small"
+                >
                   <InputLabel id="demo-select-small">وضعیت</InputLabel>
                   <Select
                     labelId="demo-select-small"
@@ -355,11 +335,8 @@ const New = () => {
                 </FormControls>
               </Col>
               <Col>
-                <Form.Group
-                  controlId="price"
-                  style={{ alignItems: "center" }}
-                >
-                  <Form.Label style={{ paddingRight: 5 }}>قیمت</Form.Label>
+                <Form.Group controlId="price" style={{alignItems: "center"}}>
+                  <Form.Label style={{paddingRight: 5}}>قیمت</Form.Label>
                   <Form.Control
                     type="number"
                     value={price}
@@ -368,15 +345,12 @@ const New = () => {
                   />
                 </Form.Group>
               </Col>
-
-
             </div>
 
             <div className="button-new">
               <Button
                 type="submit"
                 variant="primary"
-
                 className={`${pic.length > 0 ? "create-new" : "disabled"}`}
               >
                 Create Note
@@ -387,7 +361,6 @@ const New = () => {
             </div>
           </Form>
         </div>
-
       </Col>
     </Row>
   );

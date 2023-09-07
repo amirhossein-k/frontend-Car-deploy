@@ -22,20 +22,18 @@ import axios from "axios";
 
 export const listProductAction = () => async (dispatch, getState) => {
   try {
-    dispatch({ type: PRODUCT_LIST_REQUEST });
-
+    dispatch({type: PRODUCT_LIST_REQUEST});
 
     const config = {
       headers: {
         "Content-type": "application/json",
-
       },
     };
-    const { data } = await axios.get(
-      "https://carback.iran.liara.run/api/product/list",
+    const {data} = await axios.get(
+      "https://backend-car-deploy.vercel.app/api/product/list",
       config
     );
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+    dispatch({type: PRODUCT_LIST_SUCCESS, payload: data});
   } catch (error) {
     dispatch({
       type: PRODUCT_LIST_FAIL,
@@ -47,16 +45,31 @@ export const listProductAction = () => async (dispatch, getState) => {
   }
 };
 export const createProductAction =
-  (namecar, factory, distance, skills, pic, price, status,age,color,fuel,engine,healthbody,garanti,gearbox) =>
+  (
+    namecar,
+    factory,
+    distance,
+    skills,
+    pic,
+    price,
+    status,
+    age,
+    color,
+    fuel,
+    engine,
+    healthbody,
+    garanti,
+    gearbox
+  ) =>
   async (dispatch, getState) => {
     try {
       if (namecar === null || namecar === undefined) {
-        dispatch({ type: PROUCT_CREATE_NULL });
+        dispatch({type: PROUCT_CREATE_NULL});
       } else {
-        dispatch({ type: PROUCT_CREATE_REQUEST });
+        dispatch({type: PROUCT_CREATE_REQUEST});
 
         const {
-          userLogin: { userInfo },
+          userLogin: {userInfo},
         } = getState();
 
         const config = {
@@ -66,13 +79,28 @@ export const createProductAction =
           },
         };
 
-        const { data } = await axios.post(
-          "https://carback.iran.liara.run/api/product/newproduct",
-          { namecar, factory, distance, skills, pic, price, status,age,color,fuel,engine,healthbody,garanti,gearbox },
+        const {data} = await axios.post(
+          "https://backend-car-deploy.vercel.app/api/product/newproduct",
+          {
+            namecar,
+            factory,
+            distance,
+            skills,
+            pic,
+            price,
+            status,
+            age,
+            color,
+            fuel,
+            engine,
+            healthbody,
+            garanti,
+            gearbox,
+          },
           config
         );
 
-        dispatch({ type: PROUCT_CREATE_SUCCESS, payload: data });
+        dispatch({type: PROUCT_CREATE_SUCCESS, payload: data});
       }
     } catch (error) {
       dispatch({
@@ -87,21 +115,21 @@ export const createProductAction =
 
 export const deleteProductAction = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: PROUCT_DELETE_REQUEST });
+    dispatch({type: PROUCT_DELETE_REQUEST});
 
     const {
-      userLogin: { userInfo },
+      userLogin: {userInfo},
     } = getState();
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.delete(
-      `https://carback.iran.liara.run/api/product/${id}`,
+    const {data} = await axios.delete(
+      `https://backend-car-deploy.vercel.app/api/product/${id}`,
       config
     );
-    dispatch({ type: PROUCT_DELETE_SUCCESS, payload: data });
+    dispatch({type: PROUCT_DELETE_SUCCESS, payload: data});
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -116,7 +144,7 @@ export const deleteProductAction = (id) => async (dispatch, getState) => {
 export const getPrdoductAction = (id) => async (dispatch, getState) => {
   try {
     if (id === null || id === undefined) {
-      dispatch({ type: PROUCT_GET_NULL });
+      dispatch({type: PROUCT_GET_NULL});
     } else {
       dispatch({
         type: PRODUCT_GET_REQUEST,
@@ -128,13 +156,13 @@ export const getPrdoductAction = (id) => async (dispatch, getState) => {
         },
       };
 
-      const { data } = await axios.get(
-        `https://carback.iran.liara.run/api/product/${id}`,
-        { id },
+      const {data} = await axios.get(
+        `https://backend-car-deploy.vercel.app/api/product/${id}`,
+        {id},
         config
       );
 
-      dispatch({ type: PRODUCT_GET_SUCCESS, payload: data });
+      dispatch({type: PRODUCT_GET_SUCCESS, payload: data});
     }
   } catch (error) {
     const message =
@@ -149,17 +177,34 @@ export const getPrdoductAction = (id) => async (dispatch, getState) => {
 };
 
 export const updateProductAction =
-  (id, namecar, factory, distance, skills, pic, price, status,age,color,fuel,engine,healthbody,garanti,gearbox,scriptt) =>
+  (
+    id,
+    namecar,
+    factory,
+    distance,
+    skills,
+    pic,
+    price,
+    status,
+    age,
+    color,
+    fuel,
+    engine,
+    healthbody,
+    garanti,
+    gearbox,
+    scriptt
+  ) =>
   async (dispatch, getState) => {
     try {
       if (namecar === null || namecar === undefined) {
-        dispatch({ type: PROUCT_UPDATE_NULL });
+        dispatch({type: PROUCT_UPDATE_NULL});
       } else {
         dispatch({
           type: PRODUCT_UPDATE_REQUEST,
         });
         const {
-          userLogin: { userInfo },
+          userLogin: {userInfo},
         } = getState();
 
         const config = {
@@ -169,13 +214,29 @@ export const updateProductAction =
           },
         };
 
-        const { data } = await axios.put(
-          `https://carback.iran.liara.run/api/product/${id}`,
-          { namecar, factory, distance, skills, pic, price, status,age,color,fuel,engine,healthbody,garanti,gearbox,scriptt },
+        const {data} = await axios.put(
+          `https://backend-car-deploy.vercel.app/api/product/${id}`,
+          {
+            namecar,
+            factory,
+            distance,
+            skills,
+            pic,
+            price,
+            status,
+            age,
+            color,
+            fuel,
+            engine,
+            healthbody,
+            garanti,
+            gearbox,
+            scriptt,
+          },
           config
         );
 
-        dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
+        dispatch({type: PRODUCT_UPDATE_SUCCESS, payload: data});
       }
     } catch (error) {
       const message =
